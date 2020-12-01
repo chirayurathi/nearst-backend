@@ -11,6 +11,6 @@ def GeneratePdf(request):
     data['today'] = date.today()
     pdf = render_to_pdf('pdf/invoice.html', data)
     response = HttpResponse(pdf, content_type='application/pdf')
-    response['Access-Control-Allow-Origin'] = '*'
-    response['Access-Control-Allow-Headers'] = 'content-type'
+    # response['Access-Control-Allow-Origin'] = '*'
+    # response['Access-Control-Allow-Headers'] = 'content-type, Access-Control-Allow-Origin'
     return response
