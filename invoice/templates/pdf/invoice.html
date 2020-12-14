@@ -18,7 +18,7 @@ main {
   min-height: calc(100vh - 107px);
 }
 main .inner-container {
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 table.invoice {
@@ -36,7 +36,7 @@ table.invoice tr, table.invoice td {
   font-weight: 400;
   color: #322d28;
 }
-table.invoice tr.header td svg {
+table.invoice tr.header td img {
   max-width: 300px;
 }
 table.invoice tr.header td h2 {
@@ -46,8 +46,13 @@ table.invoice tr.header td h2 {
   font-size: 2rem;
   color: #1779ba;
 }
+table{
+  width: 100%;
+}
 table.invoice .intro td:nth-child(2) {
   text-align: right;
+  width: 20%;
+  margin-right:30% ;
 }
 table.invoice tr.details > td {
   padding-top: 4rem;
@@ -70,6 +75,25 @@ table.invoice tr.details table thead:after, table.invoice tr.details table tbody
   left: 0;
   margin-top: -1px;
   background: #c8c3be;
+}
+.row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.columns{
+  display: inline-block;
+  width: 100%;
+}
+.callout{
+  width: 100%;
+}
+
+table.invoice tr.totals table tr.total td:last-child{
+  width: 50%;
+}
+table.invoice tr{
+  width: 200px;
 }
 table.invoice tr.totals td {
   padding-top: 0;
@@ -101,6 +125,9 @@ table.invoice tr.totals table tr:nth-last-child(2) td:last-child:after {
   right: 0;
   bottom: -0.575rem;
   display: block;
+}
+.items{
+  margin-left:50px;
 }
 table.invoice tr.totals table tr.total td {
   font-size: 1.2em;
@@ -151,19 +178,21 @@ table.invoice tr.totals table tr.total td:last-child {
                     <table>
                       <thead>
                         <tr>
-                          <th class="desc">Item Description<th>
+                          <th class="desc">Item Description</th>
                           <th class="id">Item Price</th>
                           <th class="qty">Quantity</th>
                           <th class="amt">Subtotal</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for product in products %}
                         <tr class="item">
-                          <td class="desc">{{ product_name }}</td>
-                          <td class="id num">{{ product_price }}</td>
-                          <td class="qty">{{ product_qty }}</td>
-                          <td class="amt">{{ product_final }}</td>
+                          <td class="desc">{{ product.name }}</td>
+                          <td class="id num">{{ product.price }}</td>
+                          <td class="qty">{{ product.quantity }}</td>
+                          <td class="amt">{{ product.price }}</td>
                         </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </td> 
@@ -186,16 +215,13 @@ table.invoice tr.totals table tr.total td:last-child {
                 <div class="columns">
                   <h5>Billing Information</h5>
                   <p>{{ customer_name }}<br>
-                    {{ customer_add1 }}<br>
-                    {{ customer_add2 }}<br>
-                    {{ customer_add3 }}</p>
+                    {{ customer_add }}</p>
                 </div>
                 <div class="columns">
                   <h5>Seller Information</h5>
                   <p>{{ seller_name }}<br>
-                    {{ seller_add1 }}<br>
-                    {{ seller_add2 }}<br>
-                    ph: {{ seller_ph }}</p>
+                    {{ seller_add }}<br>
+                    ph: {{ seller_ph }}<br>
                     GSTIN: {{ seller_gst }}</p>
                 </div>
             </div>
