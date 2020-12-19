@@ -1,235 +1,164 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<style>
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  color: #322d28;
-}
-.top-bar h1 {
-  font-family: 'Montserrat', sans-serif;
-}
-main {
-  margin-top: 4rem;
-  min-height: calc(100vh - 107px);
-}
-main .inner-container {
-  width: 100%;
-  margin: 0 auto;
-}
-table.invoice {
-  background: #fff;
-}
-table.invoice .num {
-  font-weight: 200;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 0.8em;
-}
-table.invoice tr, table.invoice td {
-  background: #fff;
-  text-align: left;
-  font-weight: 400;
-  color: #322d28;
-}
-table.invoice tr.header td img {
-  max-width: 300px;
-}
-table.invoice tr.header td h2 {
-  text-align: right;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 200;
-  font-size: 2rem;
-  color: #1779ba;
-}
-table{
-  width: 100%;
-}
-table.invoice .intro td:nth-child(2) {
-  text-align: right;
-  width: 20%;
-  margin-right:30% ;
-}
-table.invoice tr.details > td {
-  padding-top: 4rem;
-  padding-bottom: 0;
-}
-table.invoice tr.details td.id, table.invoice tr.details th.id, table.invoice tr.details td.qty, table.invoice tr.details th.qty {
-  text-align: center;
-}
-table.invoice tr.details td:last-child, table.invoice tr.details th:last-child {
-  text-align: right;
-}
-table.invoice tr.details table thead, table.invoice tr.details table tbody {
-  position: relative;
-}
-table.invoice tr.details table thead:after, table.invoice tr.details table tbody:after {
-  content: '';
-  height: 1px;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  margin-top: -1px;
-  background: #c8c3be;
-}
-.row{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.columns{
-  display: inline-block;
-  width: 100%;
-}
-.callout{
-  width: 100%;
-}
+    <style>
+        @page {
+        margin: 0;
+        size:a4 portrait;
 
-table.invoice tr.totals table tr.total td:last-child{
-  width: 50%;
-}
-table.invoice tr{
-  width: 200px;
-}
-table.invoice tr.totals td {
-  padding-top: 0;
-}
-table.invoice tr.totals table tr td {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-table.invoice tr.totals table tr td:nth-child(1) {
-  font-weight: 500;
-}
-table.invoice tr.totals table tr td:nth-child(2) {
-  text-align: right;
-  font-weight: 200;
-}
-table.invoice tr.totals table tr:nth-last-child(2) td {
-  padding-bottom: 0.5em;
-}
-table.invoice tr.totals table tr:nth-last-child(2) td:last-child {
-  position: relative;
-}
-table.invoice tr.totals table tr:nth-last-child(2) td:last-child:after {
-  content: '';
-  height: 4px;
-  width: 110%;
-  border-top: 1px solid #1779ba;
-  border-bottom: 1px solid #1779ba;
-  position: relative;
-  right: 0;
-  bottom: -0.575rem;
-  display: block;
-}
-.items{
-  margin-left:50px;
-}
-table.invoice tr.totals table tr.total td {
-  font-size: 1.2em;
-  padding-top: 0.5em;
-  font-weight: 700;
-}
-table.invoice tr.totals table tr.total td:last-child {
-  font-weight: 700;
-}
-.additional-info h5 {
-  font-size: 0.8em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #1779ba;
-}
+        @frame footer{
+            bottom:0;
+            height: 50px;
+            padding: 10px 0;
+            border-top: 1px solid gray;
+            -pdf-frame-content:footerContent;
+            text-align: center;
+        }
+        }
 
-</style>
+        body{
+            margin: 0;  
+            box-sizing: border-box;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .invoice{
+            width: 100%;
+            height: 100%;
+            font-size: 1.5em;
+        }
+        .top-color{
+            width: 100%;
+            height:30px;
+            color:#085076;
+        }
+        .table1{
+            width: 100%;
+            display: block;
+            height:150px;
+            padding:20px;
+        }
+        .table2{
+            display: block;
+            margin:0 10px;
+            width:90%;
+            height:150px;
+            border-top:1px solid gray;
+            border-bottom:1px solid gray;
+            padding:20px 10px;
+        }
+        .table3{
+            display: block;
+            margin:0 10px;
+            width: 100%;
+            height: 800px;
+            padding:20px 20px;
+        }
+        .table3 tr{
+            height: 75px;
+            margin:0;
+            padding:0;
+            border-bottom: 0.5px solid rgb(230, 230, 230);
+        }
+        .table3 th,.table3 td{
+            text-align: center;
+        }
+        .table4{
+            display: block;
+            margin:0 10px;
+            width: 100%;
+            height: 300px;
+            padding: 40px 20px;
+        }
+        .table4 tr{
+            height: 40px;
+            margin:0;
+            padding: 0;
+        }
+        img{
+            display: inline;
+        }
+    </style>
 </head>
 <body>
-      <div class="row expanded">
-        <main class="columns">
-          <div class="inner-container">
-        
-          <section class="row">
-            <div class="callout large invoice-container">
-              <table class="invoice">
-                <tr class="header">
-                  <td class="">
-                    <img src="https://i.ibb.co/GtN7qY4/Near-St-Logo-v2-1.png" width="200" height="100" alt="">
-                  </td>
-                  <td class="align-right">
-                    <h2>Invoice</h2>
-                  </td>
-                </tr>
-                <tr class="intro">
-                  <td class="">
-                    Hello, {{ customer_name }}<br>
-                    Thank you for your order.
-                  </td>
-                  <td class="text-right">
-                    <span class="num">{{ order_id }}<span><br>
-                    {{ today }}
-                  </td>
-                </tr>
-                <tr class="details">
-                  <td colspan="2">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th class="desc">Item Description</th>
-                          <th class="id">Item Price</th>
-                          <th class="qty">Quantity</th>
-                          <th class="amt">Subtotal</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for product in products %}
-                        <tr class="item">
-                          <td class="desc">{{ product.name }}</td>
-                          <td class="id num">{{ product.price }}</td>
-                          <td class="qty">{{ product.quantity }}</td>
-                          <td class="amt">{{ product.price }}</td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </td> 
-                </tr>
-                <tr class="totals">
-                  <td></td>
-                  <td>
-                    <table>
-                      <tr class="total">
-                        <td>Total</td>
-                        <td>{{ product_final }}</td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-              
-            <section class="additional-info">
-            <div class="row">
-                <div class="columns">
-                  <h5>Billing Information</h5>
-                  <p>{{ customer_name }}<br>
-                    {{ customer_add }}</p>
-                </div>
-                <div class="columns">
-                  <h5>Seller Information</h5>
-                  <p>{{ seller_name }}<br>
-                    {{ seller_add }}<br>
+    <div class="invoice">
+        <div style="width:100%;height:30px;"><img src="https://i.ibb.co/Zmsrjvy/top-color.png"></div>
+        <table class="table1">
+            <tr>
+                <td style="font-size: 3em; font-weight: bold;">Invoice</td>
+                <td colspan="2"></td>
+                <td style="text-align: right;">
+                    <span style="font-weight:300;font-size: 1.7em;">{{ seller_name }}</span><br>
+                    <span style="width:50px;">  {{ seller_add }}<span><br>
                     ph: {{ seller_ph }}<br>
-                    GSTIN: {{ seller_gst }}</p>
-                </div>
-            </div>
-            </section>
-            </div>
-          </section>
-          </div>
-        </main>
-      </div>
+                    GSTIN: {{ seller_gst }}
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="table2">
+            <tr>
+                <td>
+                    <span style="font-weight: bold;font-size: 1em;">CUSTOMER DETAILS:</span><br>
+                    <span style="font-weight:300;font-size: 1.7em;">{{ customer_name }}</span><br>
+                   <span style="width:50%;">{{ customer_add }}</span><br>
+                    phone number
+                </td>
+                <td colspan="2"></td>
+                <td style="font-size:1.8em;text-align: right;">
+                    <span style="font-weight: bold;margin:10px 0;">ORDER ID:</span><br>
+                    <span style="font-size: 1.3em;margin:10px 0;">{{ order_id }}</span><br>
+                    <span style="font-weight: bold;margin:10px 0;">DATE:</span><br>
+                    <span style="font-size: 1.3em;margin:10px 0;">{{ today }}</span><br>
+                    <span style="font-weight: bold;margin:10px 0;">DELIVERY:</span><br>
+                    <span style="font-size: 1.3em;margin:10px 0;">pick up</span><br>
+                </td>
+                <td style="text-align: right;"></td>
+            </tr>
+        </table>
+        <table class="table3">
+            <tr>
+                <th colspan="3" style="padding-left:10px;text-align:left;">Item Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td colspan="3" style="padding-left:10px;text-align:left;">{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table class="table4">
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="2">Discount Rate:</td>
+                <td style="text-align: center;">300</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="2">GST Charges:</td>
+                <td style="text-align: center;">100</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="2">Delivery Charges:</td>
+                <td style="text-align: center;">{{ delivery }}</td>
+            </tr>
+            <tr style="font-size:1.5em;font-weight: 500;">
+                <td colspan="4"></td>
+                <td colspan="2">TOTAL:</td>
+                <td style="text-align: center;">{{ product_final }}</td>
+            </tr>
+        </table>
+    </div>    
+    <div id="footerContent" style="text-align: center;"><img src="https://i.ibb.co/GtN7qY4/Near-St-Logo-v2-1.png" style="margin:auto;" width="120" height="50" alt=""></div>
 </body>
 </html>

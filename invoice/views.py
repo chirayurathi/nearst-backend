@@ -33,7 +33,8 @@ def GeneratePdf(request):
         'seller_add':docsM["address"],
         'products':docs["products"],
         'product_final':docs['totalAmount'],
-        'today':docs["createdAt"]
+        'today':docs["createdAt"],
+        'delivery':docs["deliveryCharge"]
     }
     print(str(sendData))
     pdf = render_to_pdf('pdf/invoice.html', sendData)
