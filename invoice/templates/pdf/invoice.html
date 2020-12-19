@@ -122,14 +122,16 @@
         </table>
         <table class="table3">
             <tr>
-                <th colspan="3" style="padding-left:10px;text-align:left;">Item Description</th>
+                <th colspan="2" style="padding-left:10px;text-align:left;">Item Description</th>
+                <th>Size</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Sub Total</th>
             </tr>
             {% for product in products %}
             <tr>
-                <td colspan="3" style="padding-left:10px;text-align:left;">{{ product.name }}</td>
+                <td colspan="2" style="padding-left:10px;text-align:left;">{{ product.name }}</td>
+                <td>{{ product.size }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.quantity }}</td>
                 <td>{{ product.price }}</td>
